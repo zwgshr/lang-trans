@@ -21,8 +21,9 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
-    <script src="/static/lib/jquery.pin.js"></script>
+
     <script src="/static/lib/fileinput/fileinput.js"></script>
+    <script src="/static/lib/fileinput/zh.js"></script>
     <style>
         .tb tbody tr:hover {
             background: #5cb3fd;
@@ -35,13 +36,21 @@
         body {
             padding-top: 50px;
         }
-        .page-upload{
+
+        .page-upload {
             display: none;
+        }
+
+        .rg {
+            position: absolute;
+            right: 5px;
+            top: 60px;
+            width: 29%;
         }
     </style>
     <script>
         $(function () {
-            $(".pg2").pin({padding: {top: 50, bottom: 10}});
+            //$(".pg2").pin({padding: {top: 50, right: 0}});
 
             function clear_e() {
                 $('#e-us').text("");
@@ -75,7 +84,7 @@
             $('#file-langs').fileinput({
                 language: 'zh', //设置语言
                 uploadUrl: "/FileUpload/Upload", //上传的地址
-                allowedFileExtensions : ['lang', 'py'],//接收的文件后缀,
+                allowedFileExtensions: ['lang', 'py'],//接收的文件后缀,
                 maxFileCount: 10,
                 enctype: 'multipart/form-data',
                 showUpload: true, //是否显示上传按钮
@@ -114,397 +123,84 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <div class="row page-upload">
-        <div class="container kv-main">
+    <div style="width: 70%;">
+        <div class="row page-upload">
+            <div class="col-md-9 container kv-main">
 
-            <form enctype="multipart/form-data">
-                <input id="file-langs" multiple  type="file">
-            </form>
+                <form enctype="multipart/form-data">
+                    <input id="file-langs" multiple type="file">
+                </form>
 
 
+            </div>
         </div>
+        <table class="tb" style="width: 100%;" border="1">
+            <thead>
+            <tr>
+                <th>key</th>
+                <th>en_US</th>
+                <th>参考</th>
+                <th style="width: 30%;">zh_CN</th>
+                <!--<th>选择</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>itemGroup.TConstructParts</td>
+                <td class="t-us">TConstruct Tool Parts</td>
+                <td class="t-ck">匠魂|部件</td>
+                <td class="t-zh">匠魂|部件</td>
+                <!--<td class="checks"><input type="checkbox"></td>-->
+            </tr>
+
+            <tr>
+                <td>block.brownstone.smooth.chiseled.slab.name</td>
+                <td class="t-us">Chiseled Brownstone Slab</td>
+                <td class="t-ck">凿出的褐石板</td>
+                <td class="t-zh">雕琢褐岩砖台阶</td>
+                <!--<td class="checks"><input type="checkbox"></td>-->
+            </tr>
+            <tr>
+                <td>item.tconstruct.Pattern.excavator.name</td>
+                <td class="t-us">The Cutter Mattock is a versatile farming tool. It is effective on wood, dirt,
+                    and
+                    plants.\n\nSpecial Ability: Hoe\n\nRequired parts:\n- Axe Head\n- Shovel Head\n- Handle
+                </td>
+                <td class="t-ck">切割机Mattock是一种多用途耕作工具。 它对木材，泥土和植物有效。\ n \ n特殊能力：锄头\ n \ n必要零件：\ n-斧头\ n-铲头\ n-手柄
+                </td>
+                <td class="t-zh">
+                    匕首是种可投掷的短刀.\n\n特殊能力:\n- 投掷\n\n伤害: 低\n耐久: 适量\n\n需求部件:\n- 刀刃\n- 十字柄\n- 手柄
+                </td>
+
+                <!--<td class="checks"><input type="checkbox"></td>-->
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="row">
-        <div class="col-md-9">
-            <table class="tb" style="width: 100%;" border="1">
-                <thead>
-                <tr>
-                    <th>key</th>
-                    <th>en_US</th>
-                    <th>参考</th>
-                    <th style="width: 30%;">zh_CN</th>
-                    <!--<th>选择</th>-->
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>itemGroup.TConstructParts</td>
-                    <td class="t-us">TConstruct Tool Parts</td>
-                    <td class="t-ck">匠魂|部件</td>
-                    <td class="t-zh">匠魂|部件</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>block.brownstone.smooth.chiseled.slab.name</td>
-                    <td class="t-us">Chiseled Brownstone Slab</td>
-                    <td class="t-ck">凿出的褐石板</td>
-                    <td class="t-zh">雕琢褐岩砖台阶</td>
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                <tr>
-                    <td>item.tconstruct.Pattern.excavator.name</td>
-                    <td class="t-us">The Cutter Mattock is a versatile farming tool. It is effective on wood, dirt, and
-                        plants.\n\nSpecial Ability: Hoe\n\nRequired parts:\n- Axe Head\n- Shovel Head\n- Handle
-                    </td>
-                    <td class="t-ck">切割机Mattock是一种多用途耕作工具。 它对木材，泥土和植物有效。\ n \ n特殊能力：锄头\ n \ n必要零件：\ n-斧头\ n-铲头\ n-手柄
-                    </td>
-                    <td class="t-zh">
-                        匕首是种可投掷的短刀.\n\n特殊能力:\n- 投掷\n\n伤害: 低\n耐久: 适量\n\n需求部件:\n- 刀刃\n- 十字柄\n- 手柄
-                    </td>
 
-                    <!--<td class="checks"><input type="checkbox"></td>-->
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-3 pg2">
-            <table style="width: 100%;" border="0" class="">
-                <tr>
-                    <th style="width: 50%"><b>en_US:</b></th>
-                </tr>
-                <tr>
-                    <td id="e-us"></td>
-                </tr>
-                <tr>
-                    <th style="width: 50%"><b>参考:</b></th>
-                </tr>
-                <tr>
-                    <td id="e-ck"></td>
-                </tr>
-                <tr>
-                    <th>翻译：</th>
-                </tr>
-                <tr>
-                    <td><textarea style="width: 100%;height: 90px;" id="e-zh"></textarea></td>
-                </tr>
-            </table>
-            <input type="button" id="e-save" value="保存">
-        </div>
+    <div class="rg">
+
+        <table style="width: 100%;" border="0" class="">
+            <tr>
+                <th style="width: 50%"><b>en_US:</b></th>
+            </tr>
+            <tr>
+                <td id="e-us"></td>
+            </tr>
+            <tr>
+                <th style="width: 50%"><b>参考:</b></th>
+            </tr>
+            <tr>
+                <td id="e-ck"></td>
+            </tr>
+            <tr>
+                <th>翻译：</th>
+            </tr>
+            <tr>
+                <td><textarea style="width: 100%;height: 90px;" id="e-zh"></textarea></td>
+            </tr>
+        </table>
+        <input type="button" id="e-save" value="保存">
     </div>
 </div>
 

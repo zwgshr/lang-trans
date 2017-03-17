@@ -1,5 +1,6 @@
 from flask import request, Flask, render_template, session, redirect, url_for, escape
 from werkzeug import secure_filename
+import json
 import os
 
 UPLOAD_FOLDER = 'temp/'
@@ -47,6 +48,9 @@ def login():
         session['email'] = request.form['email']
         session['password'] = request.form['password']
         if _yz_user(session):
+            if not os.path.isdir(UPLOAD_FOLDER + session['email']):
+                os.mkdir(UPLOAD_FOLDER + session['email'])
+
             return redirect(url_for('index'))
         else:
             return redirect(url_for('login'))
@@ -64,8 +68,8 @@ def Upload(**args):
     file = request.files['file_data']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file.save(os.path.join(UPLOAD_FOLDER, filename))
-    return 'ok'
+        file.save(os.path.join(UPLOAD_FOLDER, session['email'] + "/" + filename))
+    return json.dumps({"errno": 0, "errmsg": "上传成功"})
 
 
 if __name__ == "__main__":
