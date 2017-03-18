@@ -87,7 +87,12 @@
                 <input id="file-langs" multiple type="file" autocomplete="off">
                 <input id="upload_file" disabled="disabled" type="button" value="上传">
                 <div id="files">
-
+                    <p>
+                    目前只允许一下三种上传:<br>
+                        1、上传一个zh_CN.lang文件<br>
+                        2、上传一个非zh_CN.lang文件<br>
+                        3、上传一个zh_CN.lang文件+一个其他语种lang文件<br>
+                    </p>
                 </div>
 
 
@@ -97,7 +102,7 @@
             <thead>
             <tr>
                 <th>key</th>
-                <th>en_US</th>
+                <th>en_ot</th>
                 <th>参考</th>
                 <th style="width: 30%;">zh_CN</th>
             </tr>
@@ -111,10 +116,10 @@
 
         <table style="width: 100%;" border="0" class="">
             <tr>
-                <th style="width: 50%"><b>en_US:</b></th>
+                <th style="width: 50%"><b>en_ot:</b></th>
             </tr>
             <tr>
-                <td id="e-us"></td>
+                <td id="e-ot"></td>
             </tr>
             <tr>
                 <th style="width: 50%"><b>参考:</b></th>

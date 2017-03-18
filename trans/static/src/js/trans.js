@@ -1,59 +1,10 @@
 $(function () {
-    $("#tb tbody").append("<tr v-for='line in lines'><td class='t-key'>{{ line.key }}</td><td class='t-us'>{{ line.us }}</td><td class='t-ck'>{{ line.ck }}</td><td class='t-zh'>{{ line.zh }}</td> </tr>");
-
-
-    var $tb = new Vue({
-        el: '#tb',
-        data: {
-            lines: [
-                {key: '1', us: '333', ck: '555', zh: 'fef'},
-                {key: '2', us: '333', ck: '555', zh: 'fef'},
-                {key: '3', us: '333', ck: '555', zh: 'fef'},
-            ]
-        }
-    });
 
 
     $('#upload').on('click', function () {
         $('.page-upload').toggle();
     });
 
-
-    //初始化fileinput控件（第一次初始化）
-    // $('#file-langs').fileinput({
-    //     language: 'zh', //设置语言
-    //     uploadUrl: "/FileUpload/Upload", //上传的地址
-    //     allowedFileExtensions: ['lang', 'py'],//接收的文件后缀,
-    //     maxFileCount: 10,
-    //     enctype: 'multipart/form-data',
-    //     showUpload: true, //是否显示上传按钮
-    //     showCaption: false,//是否显示标题
-    //     browseClass: "btn btn-primary", //按钮样式
-    //     previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-    //     msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-    // });
-
-
-    function clear_e() {
-        $('#e-us').text("");
-        $('#e-ck').text("");
-        $('#e-zh').val("");
-    }
-
-    $('#tb').on('click', 'tbody tr', function (e) {
-        if ($(this).hasClass('seled')) {
-            $(this).removeClass('seled');
-            clear_e();
-        }
-        else {
-            $('.seled').removeClass('seled');
-            $(this).addClass('seled');
-            clear_e();
-            $('#e-us').text($(this).find('.t-us').text());
-            $('#e-ck').text($(this).find('.t-ck').text());
-            $('#e-zh').val($(this).find('.t-zh').text());
-        }
-    });
     $('#e-save').on('click', function () {
         var tmp = $('#e-zh').val();
 
@@ -107,7 +58,7 @@ $(function () {
             var reader = new FileReader();
             reader.onload = (function (file) {
                 return function (e) {
-                    $('#files').data(file.name, this.result);
+                    $('#files').data(file.name.replace('.lang', ""), this.result);
                 };
             })(files[i]);
             //读取文件内容
@@ -121,13 +72,51 @@ $(function () {
     $('#upload_file')
         .attr('disabled', 'disabled') //禁用上传按钮
         .on('click', function () {
-        var data = JSON.stringify($('#files').data());
-        $.post("/upload", {data: data}, function (datas) {
-                console.log(datas);
-            }
-        )
-    });
+            var data = JSON.stringify($('#files').data());
+            $.post("/upload", {data: data}, function (datas) {
+                    //console.log(datas);
+                    $("#tb tbody")
+                        .empty()
+                        .append("<tr v-for='line in lines'><td class='t-key'>{{ line.key }}</td><td class='t-ot'>{{ line.ot }}</td><td class='t-ck'>{{ line.ck }}</td><td class='t-zh'>{{ line.zh }}</td> </tr>");
+                    //填充数据
+                    var lines = JSON.parse(datas);
+                    window.ssr = lines;
+                    var $tb = new Vue({
+                        el: '#tb',
+                        data: {
+                            lines: lines
+                        }
+                    });
+                    $('#tb tbody')
+                        .off()
+                        .on('click', 'tr', handle_tr_click);
+                }
+            )
+        });
 
 
+    var handle_tr_click = function (e) {
+        if ($(this).hasClass('seled')) {
+            $(this).removeClass('seled');
+
+
+            $('#e-ot').text("");
+            $('#e-ck').text("");
+            $('#e-zh').val("");
+        }
+        else {
+            $('.seled').removeClass('seled');
+            $(this).addClass('seled');
+
+
+            // $('#e-ot').text("");
+            // $('#e-ck').text("");
+            // $('#e-zh').val("");
+
+            $('#e-ot').text($(this).find('.t-ot').text());
+            $('#e-ck').text($(this).find('.t-ck').text());
+            $('#e-zh').val($(this).find('.t-zh').text());
+        }
+    }
 
 });

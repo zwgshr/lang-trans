@@ -2,6 +2,7 @@ from flask import request, Flask, render_template, session, redirect, url_for, e
 from werkzeug import secure_filename
 import json
 import os
+import trans
 
 UPLOAD_FOLDER = 'temp/'
 ALLOWED_EXTENSIONS = set(['lang', 'py'])
@@ -81,7 +82,8 @@ def save():
 def upload():
     data = json.loads(request.form['data'])
     session['source'] = data
-    return "233"
+    res = trans.parse(data)
+    return json.dumps(res)
 
 
 if __name__ == "__main__":
