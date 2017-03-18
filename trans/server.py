@@ -63,13 +63,25 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route('/FileUpload/Upload', methods=['POST'])
-def Upload(**args):
-    file = request.files['file_data']
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(UPLOAD_FOLDER, session['email'] + "/" + filename))
-    return json.dumps({"errno": 0, "errmsg": "上传成功"})
+@app.route('/save', methods=["POST"])
+def save():
+    data = json.loads(request.form['data'])
+    return "ok"
+
+
+# @app.route('/FileUpload/Upload', methods=['POST'])
+# def Upload(**args):
+#     file = request.files['file_data']
+#     if file and allowed_file(file.filename):
+#         filename = secure_filename(file.filename)
+#         file.save(os.path.join(UPLOAD_FOLDER, session['email'] + "/" + filename))
+#     return json.dumps({"errno": 0, "errmsg": "上传成功"})
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    data = json.loads(request.form['data'])
+    session['source'] = data
+    return "233"
 
 
 if __name__ == "__main__":
