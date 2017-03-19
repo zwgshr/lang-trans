@@ -65,7 +65,7 @@ def _parse(datas):
 
 
 
-def _load(datas):
+def load(datas):
     '''
     从文本中提取键值对
     :param datas:
@@ -90,19 +90,18 @@ def _load(datas):
     return res
 
 
-def parse(datas):
+def parse(data):
     '''
     :param datas:
     :return:
     '''
-    data = _load(datas)
-    if len(datas) == 1:
-        if 'zh_CN' in datas:
+    if len(data) == 1:
+        if 'zh_CN' in data:
             return _parse_zh(data)
         else:
             return _parse_ot(data)
-    elif len(datas) == 2:
-        if 'zh_CN' in datas:
+    elif len(data) == 2:
+        if 'zh_CN' in data:
             return _parse(data)
 
     return False

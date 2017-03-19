@@ -117,6 +117,6 @@ $(function () {
             $('#e-ck').text($(this).find('.t-ck').text());
             $('#e-zh').val($(this).find('.t-zh').text());
         }
-    }
+    };
 
 });
