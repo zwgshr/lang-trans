@@ -149,5 +149,6 @@ def init():
 
 
 if __name__ == "__main__":
+    os.chdir(os.path.dirname(__file__))
     init()
     app.run('0.0.0.0')

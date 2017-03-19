@@ -1,7 +1,6 @@
 # /usr/bin/env python
-# coding=utf8
-import http.client
 import urllib.parse
+import requests
 import random
 import hashlib
 import json
@@ -21,8 +20,7 @@ def _bd_trans(q, lang=""):
     :param q: 多个单词以 \n 分隔，例：'watch\napple\nmaybe'
     :return: 例：{'watch': '看', 'apple': '苹果', 'maybe': '也许吧'}
     '''
-    httpClient = None
-    # q = 'apple'
+
     salt = random.randint(32768, 65536)
 
     lang = lang.lower()
@@ -38,24 +36,19 @@ def _bd_trans(q, lang=""):
         q) + '&from=' + fromLang + '&to=' + toLang + '&salt=' + str(salt) + '&sign=' + sign
 
     res = {}
-    try:
-        httpClient = http.client.HTTPConnection('api.fanyi.baidu.com')
-        httpClient.request('GET', url)
 
-        # response是HTTPResponse对象
-        response = httpClient.getresponse()
-        datas = json.loads(response.read())
-        for data in datas['trans_result']:
-            res[data['src']] = data['dst']
-
-
-    except Exception as e:
-        print(e)
-    finally:
-        if httpClient:
-            httpClient.close()
+    reqs = requests.get('http://api.fanyi.baidu.com' + url)
+    if reqs.status_code != 200:
+        print("调用百度翻译接口失败")
+        print(reqs._content)
+        return 'err'
+    datas = json.loads(reqs._content.decode())
+    for data in datas['trans_result']:
+        res[data['src']] = data['dst']
 
     return res
+
+
 
 
 def bd_trans(datas, lang):
