@@ -68,32 +68,42 @@ $(function () {
         $('#upload_file').removeAttr('disabled'); //启用上传按钮
 
     });
+    var fill_table = function () {
+        if (window.current_data == undefined) {
+            return
+        }
+        var datas = window.current_data;
+        $("#tb tbody")
+            .empty()
+            .append("<tr v-for='line in lines'><td class='t-key'>{{ line.key }}</td><td class='t-ot'>{{ line.ot }}</td><td class='t-ck'>{{ line.ck }}</td><td class='t-zh'>{{ line.zh }}</td> </tr>");
+        //填充数据
+        var lines = JSON.parse(datas);
+        window.ssr = lines;
+        var $tb = new Vue({
+            el: '#tb',
+            data: {
+                lines: lines
+            }
+        });
+        $('#tb tbody')
+            .off()
+            .on('click', 'tr', handle_tr_click);
+    };
+
+
     // 上传文件内容
     $('#upload_file')
         .attr('disabled', 'disabled') //禁用上传按钮
         .on('click', function () {
             var data = JSON.stringify($('#files').data());
             $.post("/upload", {data: data}, function (datas) {
-                    //console.log(datas);
-                    $("#tb tbody")
-                        .empty()
-                        .append("<tr v-for='line in lines'><td class='t-key'>{{ line.key }}</td><td class='t-ot'>{{ line.ot }}</td><td class='t-ck'>{{ line.ck }}</td><td class='t-zh'>{{ line.zh }}</td> </tr>");
-                    //填充数据
-                    var lines = JSON.parse(datas);
-                    window.ssr = lines;
-                    var $tb = new Vue({
-                        el: '#tb',
-                        data: {
-                            lines: lines
-                        }
-                    });
-                    $('#tb tbody')
-                        .off()
-                        .on('click', 'tr', handle_tr_click);
+                    window.current_data = datas;
+                    fill_table();
                 }
             )
         });
 
+    $('#reset').on('click', fill_table);
 
     var handle_tr_click = function (e) {
         if ($(this).hasClass('seled')) {
