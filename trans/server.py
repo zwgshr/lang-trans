@@ -5,6 +5,7 @@ import json
 import os
 import trans
 import io
+import time
 
 UPLOAD_FOLDER = 'temp/'
 ALLOWED_EXTENSIONS = set(['lang', 'py'])
@@ -15,11 +16,6 @@ app.config['MAX_CONTENT_LENGTH'] = 4 * 1024 * 1024  # 上传文件限制
 
 GRES = {}
 
-users = {
-    'admin@a': 'admin',
-    'coc@c': 'admin',
-}
-
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -28,7 +24,7 @@ def allowed_file(filename):
 
 def _yz_user(ses):
     if 'email' in ses and 'password' in ses:
-        if ses['email'] in users and ses['password'] == users[ses['email']]:
+        if ses['email'] in GRES['users'] and ses['password'] == GRES['users'][ses['email']]["password"]:
             return True
 
     return False
@@ -41,6 +37,22 @@ def index():
         return redirect(url_for('login'))
     else:
         return render_template('trans.html', name="0")
+
+
+@app.route('/register', methods=['POST'])
+def register():
+    email = request.form['email']
+    password = request.form['password']
+    if email in GRES['users']:
+        return "用户名重复"
+
+    GRES['users'][email] = {
+        "password": password,
+        "reg_time": time.time()
+    }
+    with open("Users.json", 'w') as f:
+        f.write(json.dumps(GRES['users']))
+    return "注册成功"
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -128,5 +140,14 @@ def download():
     return response
 
 
+# 读取用户信息
+def init():
+    with open('Users.json') as f:
+        data = json.loads(f.read())
+        GRES['users'] = data
+        print('成功加载账号信息')
+
+
 if __name__ == "__main__":
+    init()
     app.run('0.0.0.0')
