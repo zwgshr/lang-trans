@@ -16,7 +16,20 @@ def _parse_ot(datas):
     :param data:
     :return:
     '''
-    pass
+    ot_lang = list(datas.keys())[0]
+    ot_data = datas[ot_lang]
+    tr_data = bd_trans(ot_data, ot_lang)
+
+    res = []
+    for key in ot_data:
+        res.append({
+            'key': key,
+            'ot': ot_data[key],
+            'ck': tr_data[ot_data[key]],
+            'zh': tr_data[ot_data[key]]
+        })
+
+    return res
 
 
 def _parse(datas):
