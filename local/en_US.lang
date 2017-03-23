@@ -1,0 +1,42 @@
+item.oreplants:coalseeds.name=Coal Seeds
+item.oreplants:diamondseeds.name=Diamond Seeds
+item.oreplants:emeraldseeds.name=Emerald Seeds
+item.oreplants:goldseeds.name=Gold Seeds
+item.oreplants:ironseeds.name=Iron Seeds
+item.oreplants:lapisseeds.name=Lapis Seeds
+item.oreplants:netherseeds.name=Nether Seeds
+item.oreplants:obsidianseeds.name=Obsidian Seeds
+item.oreplants:quartzseeds.name=Quartz Seeds
+item.oreplants:redstoneseeds.name=Redstone Seeds
+
+item.oreplants:coalshard.name=Coal Shard
+item.oreplants:diamondshard.name=Diamond Shard
+item.oreplants:emeraldshard.name=Emerald Shard
+item.oreplants:goldshard.name=Gold Shard
+item.oreplants:ironshard.name=Iron Shard
+item.oreplants:lapisshard.name=Lapis Shard
+item.oreplants:nethershard.name=Nether Shard
+item.oreplants:obsidianshard.name=Obsidian Shard
+item.oreplants:quartzshard.name=Quartz Shard
+item.oreplants:redstoneshard.name=Redstone Shard
+
+item.oreplants:essencedust.name=Essence Dust
+
+tile.oreplants:essenceore.name=Essence Ore
+tile.oreplants:essenceblock.name=Essence Block
+
+tile.oreplants:coalcrop.name=Coal Crop
+tile.oreplants:diamondcrop.name=Diamond Crop
+tile.oreplants:emeraldcrop.name=Emerald Crop
+tile.oreplants:goldcrop.name=Gold Crop
+tile.oreplants:ironcrop.name=Iron Crop
+tile.oreplants:lapiscrop.name=Lapis Crop
+tile.oreplants:nethercrop.name=Nether Crop
+tile.oreplants:obsidiancrop.name=Obsidian Crop
+tile.oreplants:quartzcrop.name=Quartz Crop
+tile.oreplants:redstonecrop.name=Redstone Crop
+
+tile.oreplants:infuser.name=Essence Infuser
+tile.oreplants:enricher.name=Seed Enricher
+
+fluid.oreplants:fluidpure=Pure Essence
