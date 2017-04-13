@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Lang Trans Tool</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="/static/lib/fileinput/fileinput.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="/static/src/css/trans.css" media="all" rel="stylesheet" type="text/css"/>
+
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"-->
+    <!--integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <script src="/static/lib/underscore.js"></script>
+    <script src="/static/lib/underscore.string.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="/static/lib/fileinput/fileinput.js"></script>
+    <script src="/static/lib/fileinput/zh.js"></script>
+    <style>
+        #tb tbody tr:hover {
+            background: #5cb3fd;
+        }
+
+        .seled {
+            background: #5cb3fd;
+        }
+
+        body {
+            padding-top: 50px;
+        }
+
+        .page-upload {
+            display: none;
+        }
+
+        .rg {
+            position: absolute;
+            right: 5px;
+            top: 60px;
+            width: 29%;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse"
+                    class="navbar-toggle collapsed" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">Project name</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="#" id="upload">上传</a></li>
+                <li><a href="#" id="save">保存</a></li>
+                <li><a href="#" id="reset">重置</a></li>
+                <li><a href="/download" id="download">下载</a></li>
+                <li><a href="/logout" id="logout">注销</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" placeholder="Search..." class="form-control">
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div style="width: 70%;">
+        <div class="row page-upload">
+            <div class="col-md-9 container kv-main">
+                <input id="file-langs" multiple type="file" autocomplete="off">
+                <input id="upload_file" disabled="disabled" type="button" value="上传">
+                <div id="files">
+                    <p>
+                        目前只允许一下三种上传:<br>
+                        1、上传一个zh_CN.lang文件<br>
+                        2、上传一个非zh_CN.lang文件<br>
+                        3、上传一个zh_CN.lang文件+一个其他语种lang文件<br>
+                    </p>
+                </div>
+
+
+            </div>
+        </div>
+        <table id="tb" style="width: 100%;" border="1">
+            <thead>
+            <tr>
+                <th>key</th>
+                <th>en_ot</th>
+                <th>参考</th>
+                <th style="width: 30%;">zh_CN</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="rg">
+
+        <table style="width: 100%;" border="0" class="">
+            <tr>
+                <th style="width: 50%"><b>en_ot:</b></th>
+            </tr>
+            <tr>
+                <td id="e-ot"></td>
+            </tr>
+            <tr>
+                <th style="width: 50%"><b>参考:</b></th>
+            </tr>
+            <tr>
+                <td id="e-ck"></td>
+            </tr>
+            <tr>
+                <th>翻译：</th>
+            </tr>
+            <tr>
+                <td><textarea style="width: 100%;height: 90px;" id="e-zh"></textarea></td>
+            </tr>
+        </table>
+        <input type="button" id="e-save" value="保存">
+    </div>
+</div>
+
+
+<script src="/static/src/js/trans.js"></script>
+</body>
+</html>
